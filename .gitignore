@@ -34,10 +34,6 @@ webcam*.png
 *.zip
 !resources/
 
-# Claude / AI
-.claude/
-.codex
-
 # Docker
 docker-compose.override.yml
 
