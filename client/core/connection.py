@@ -1,7 +1,7 @@
 import socket
 import time
 
-from agent.core.protocol import reliable_send, reliable_recv
+from client.core.protocol import reliable_send, reliable_recv
 
 
 def connect_and_run(host, port, shell_callback):

@@ -1,7 +1,7 @@
 import subprocess
 import threading
 
-from agent.core.protocol import reliable_send
+from client.core.protocol import reliable_send
 
 
 def run_command(sock, command):

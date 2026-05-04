@@ -1,9 +1,9 @@
 import sys
 
-from agent.core.config import load_config
-from agent.core.connection import connect_and_run
-from agent.core.dispatcher import handle_session
-from agent.platform import get_platform
+from client.core.config import load_config
+from client.core.connection import connect_and_run
+from client.core.dispatcher import handle_session
+from client.platform import get_platform
 
 
 def main():

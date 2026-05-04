@@ -1,6 +1,6 @@
 import os
-from agent.platform.windows import WindowsPlatform
-from agent.platform.linux import LinuxPlatform
+from client.platform.windows import WindowsPlatform
+from client.platform.linux import LinuxPlatform
 
 
 def get_platform():

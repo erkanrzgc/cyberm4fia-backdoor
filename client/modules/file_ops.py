@@ -4,7 +4,7 @@ import subprocess
 import base64
 import shlex
 
-from agent.core.protocol import reliable_send, reliable_recv
+from client.core.protocol import reliable_send, reliable_recv
 
 
 def download_file(sock, file_name):

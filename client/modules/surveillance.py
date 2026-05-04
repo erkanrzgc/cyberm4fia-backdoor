@@ -2,8 +2,8 @@ import os
 import subprocess
 import base64
 
-from agent.core.protocol import reliable_send
-from agent.modules.file_ops import upload_file
+from client.core.protocol import reliable_send
+from client.modules.file_ops import upload_file
 
 
 def screenshot(sock):

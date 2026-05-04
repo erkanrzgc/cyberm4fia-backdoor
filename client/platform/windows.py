@@ -3,7 +3,7 @@ import subprocess
 import shutil
 import sys
 
-from agent.platform.base import AbstractPlatform
+from client.platform.base import AbstractPlatform
 
 
 class WindowsPlatform(AbstractPlatform):

