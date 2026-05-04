@@ -1,0 +1,8 @@
+termcolor
+pynput
+Pillow
+pyautogui
+pyscreeze
+pyperclip
+opencv-python
+cryptography

