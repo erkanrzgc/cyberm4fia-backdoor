@@ -1,27 +1,45 @@
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
 *.egg-info/
+*.egg
 dist/
 build/
 *.spec
+*.manifest
 
-# Env files
+# Virtual env
 .env
 .venv/
 venv/
+env/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Loot
+# Loot / exfil
 loot/
+screenshot*.png
+webcam*.png
+*.zip
+!resources/
 
 # Claude / AI
 .claude/
 .codex
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
