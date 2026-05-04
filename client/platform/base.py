@@ -36,6 +36,10 @@ class AbstractPlatform(ABC):
         ...
 
     @abstractmethod
+    def pkill_cmd(self, name):
+        ...
+
+    @abstractmethod
     def network_info_cmd(self):
         ...
 

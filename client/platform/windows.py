@@ -34,6 +34,9 @@ class WindowsPlatform(AbstractPlatform):
     def kill_process_cmd(self, pid):
         return f'taskkill /F /PID {pid}'
 
+    def pkill_cmd(self, name):
+        return f'taskkill /F /IM {name}.exe'
+
     def network_info_cmd(self):
         return 'ipconfig'
 

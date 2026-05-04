@@ -34,6 +34,9 @@ class LinuxPlatform(AbstractPlatform):
     def kill_process_cmd(self, pid):
         return f'kill -9 {pid}'
 
+    def pkill_cmd(self, name):
+        return f'pkill {name}'
+
     def network_info_cmd(self):
         return 'ifconfig'
 

