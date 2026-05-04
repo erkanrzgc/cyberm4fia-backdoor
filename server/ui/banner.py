@@ -7,7 +7,7 @@ def print_gradient_banner():
 ╚██████╗   ██║   ██████╔╝███████╗██║  ██║██║ ╚═╝ ██║     ██║██║     ██║██║  ██║
  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ 
 '''
-    lines = banner.strip().split('\n')
+    lines = banner.strip('\n').split('\n')
     start_color = (230, 230, 230)
     end_color = (40, 40, 40)
 
