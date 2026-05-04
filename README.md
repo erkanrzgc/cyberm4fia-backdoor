@@ -14,7 +14,7 @@
  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝
 </pre>
 </td><td valign="middle">
-<img src="https://raw.githubusercontent.com/erkanrzgc/cyberm4fia-backdoor/main/resources/trojan.png" width="150">
+<img src="https://raw.githubusercontent.com/erkanrzgc/cyberm4fia-backdoor/main/server/ui/assets/trojan.png" width="150">
 </td></tr></table>
 
 <p align="center">
@@ -91,8 +91,6 @@ cyberm4fia-backdoor/
 │   └── ui/
 │       ├── banner.py               # ANSI gradient CYBERM4FIA banner
 │       └── prompt.py               # ANSI color helper
-│
-├── resources/                      # Assets (trojan.png)
 ├── Dockerfile                      # Server container build
 ├── docker-compose.yml              # One-command C2 deployment
 └── requirements.txt                # Python dependencies

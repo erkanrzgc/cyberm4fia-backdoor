@@ -32,7 +32,6 @@ loot/
 screenshot*.png
 webcam*.png
 *.zip
-!resources/
 
 # Docker
 docker-compose.override.yml
