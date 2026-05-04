@@ -1,5 +1,5 @@
 {
-    "server_host": "192.168.174.128",
+    "server_host": "127.0.0.1",
     "server_port": 5555,
     "reconnect_interval": 5
 }

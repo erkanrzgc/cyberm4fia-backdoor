@@ -142,7 +142,7 @@ pyinstaller --onefile --noconsole client/client.py
 
 | Key | Default | Description |
 | --- | --- | --- |
-| `server_host` | `192.168.174.128` | C2 server IP address |
+| `server_host` | `127.0.0.1` | C2 server IP address |
 | `server_port` | `5555` | C2 server port |
 | `reconnect_interval` | `5` | Seconds between reconnect attempts |
 
