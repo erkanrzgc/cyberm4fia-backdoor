@@ -14,7 +14,7 @@
  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝
 </pre>
 </td><td valign="middle">
-<img src="https://raw.githubusercontent.com/erkanrzgc/cyberm4fia-backdoor/main/resources/trojan.png" width="150">
+<img src="https://raw.githubusercontent.com/erkanrzgc/cyberm4fia-osint/main/resources/osint_icon.png" width="150">
 </td></tr></table>
 
 <p align="center">
