@@ -1,5 +1,1 @@
-{
-    "bind_host": "0.0.0.0",
-    "bind_port": 5555,
-    "loot_dir": "./loot"
-}
+{}

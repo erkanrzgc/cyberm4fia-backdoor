@@ -2,17 +2,42 @@ import json
 import os
 
 
+def _load_dotenv():
+    env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+    if not os.path.exists(env_path):
+        return {}
+    values = {}
+    with open(env_path, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            key, _, val = line.partition('=')
+            key, val = key.strip(), val.strip()
+            if key and val:
+                values[key] = val
+    return values
+
+
 def load_config():
+    env = _load_dotenv()
+
     config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.json')
-    defaults = {
-        'bind_host': '0.0.0.0',
-        'bind_port': 5555,
-        'loot_dir': './loot'
-    }
+    defaults = {}
+
     try:
         with open(config_path, 'r') as f:
             config = json.load(f)
         defaults.update(config)
     except Exception:
         pass
-    return defaults
+
+    bind_host = env.get('CYBERM4FIA_BIND_HOST') or defaults.get('bind_host', '0.0.0.0')
+    bind_port = int(env.get('CYBERM4FIA_BIND_PORT') or defaults.get('bind_port', 5555))
+    loot_dir = env.get('CYBERM4FIA_LOOT_DIR') or defaults.get('loot_dir', './loot')
+
+    return {
+        'bind_host': bind_host,
+        'bind_port': bind_port,
+        'loot_dir': loot_dir,
+    }

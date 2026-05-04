@@ -138,21 +138,28 @@ pyinstaller --onefile --noconsole client/client.py
 
 ## Configuration
 
-### `client/config.json`
+Sensitive values are loaded from `.env` files (never committed). Template files are provided.
 
-| Key | Default | Description |
+```bash
+cp client/.env.example client/.env
+cp server/.env.example server/.env
+```
+
+### `client/.env`
+
+| Variable | Default | Description |
 | --- | --- | --- |
-| `server_host` | `127.0.0.1` | C2 server IP address |
-| `server_port` | `5555` | C2 server port |
-| `reconnect_interval` | `5` | Seconds between reconnect attempts |
+| `CYBERM4FIA_SERVER_HOST` | `127.0.0.1` | C2 server IP address |
+| `CYBERM4FIA_SERVER_PORT` | `5555` | C2 server port |
+| `CYBERM4FIA_RECONNECT_INTERVAL` | `5` | Seconds between reconnect attempts |
 
-### `server/config.json`
+### `server/.env`
 
-| Key | Default | Description |
+| Variable | Default | Description |
 | --- | --- | --- |
-| `bind_host` | `0.0.0.0` | Address to listen on |
-| `bind_port` | `5555` | Port to listen on |
-| `loot_dir` | `./loot` | Directory for screenshots, downloads |
+| `CYBERM4FIA_BIND_HOST` | `0.0.0.0` | Address to listen on |
+| `CYBERM4FIA_BIND_PORT` | `5555` | Port to listen on |
+| `CYBERM4FIA_LOOT_DIR` | `./loot` | Directory for screenshots, downloads |
 
 ---
 
