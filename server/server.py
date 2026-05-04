@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from server.core.config import load_config
 from server.core.listener import start_listener
 from server.core.session import run_session
